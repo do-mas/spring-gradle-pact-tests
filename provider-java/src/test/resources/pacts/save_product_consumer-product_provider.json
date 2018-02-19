@@ -1,0 +1,93 @@
+{
+    "provider": {
+        "name": "product_provider"
+    },
+    "consumer": {
+        "name": "save_product_consumer"
+    },
+    "interactions": [
+        {
+            "description": "a request to save product",
+            "request": {
+                "method": "POST",
+                "path": "/api/products",
+                "headers": {
+                    "Content-Type": "application/json; charset=UTF-8"
+                },
+                "body": {
+                    "productId": 1,
+                    "productName": "a product name"
+                },
+                "matchingRules": {
+                    "body": {
+                        "$.productId": {
+                            "matchers": [
+                                {
+                                    "match": "integer"
+                                }
+                            ],
+                            "combine": "AND"
+                        },
+                        "$.productName": {
+                            "matchers": [
+                                {
+                                    "match": "type"
+                                }
+                            ],
+                            "combine": "AND"
+                        }
+                    },
+                    "path": {
+                        
+                    },
+                    "header": {
+                        
+                    }
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json;charset=UTF-8"
+                },
+                "body": {
+                    "productId": 1,
+                    "productName": "a product name"
+                },
+                "matchingRules": {
+                    "body": {
+                        "$.productId": {
+                            "matchers": [
+                                {
+                                    "match": "integer"
+                                }
+                            ],
+                            "combine": "AND"
+                        },
+                        "$.productName": {
+                            "matchers": [
+                                {
+                                    "match": "type"
+                                }
+                            ],
+                            "combine": "AND"
+                        }
+                    }
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "create product"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.12"
+        }
+    }
+}

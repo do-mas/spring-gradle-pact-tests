@@ -1,0 +1,104 @@
+{
+    "provider": {
+        "name": "product_provider"
+    },
+    "consumer": {
+        "name": "product_consumer_list"
+    },
+    "interactions": [
+        {
+            "description": "a request to get product",
+            "request": {
+                "method": "GET",
+                "path": "/api/products"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": [
+                    {
+                        "productId": 100,
+                        "productName": "string"
+                    },
+                    {
+                        "productId": 100,
+                        "productName": "string"
+                    }
+                ],
+                "matchingRules": {
+                    "body": {
+                        "$[0].productId": {
+                            "matchers": [
+                                {
+                                    "match": "integer"
+                                }
+                            ],
+                            "combine": "AND"
+                        },
+                        "$[0].productName": {
+                            "matchers": [
+                                {
+                                    "match": "type"
+                                }
+                            ],
+                            "combine": "AND"
+                        },
+                        "$[1].productId": {
+                            "matchers": [
+                                {
+                                    "match": "integer"
+                                }
+                            ],
+                            "combine": "AND"
+                        },
+                        "$[1].productName": {
+                            "matchers": [
+                                {
+                                    "match": "type"
+                                }
+                            ],
+                            "combine": "AND"
+                        }
+                    }
+                },
+                "generators": {
+                    "body": {
+                        "$[0].productId": {
+                            "type": "RandomInt",
+                            "min": 0,
+                            "max": 2147483647
+                        },
+                        "$[0].productName": {
+                            "type": "RandomString",
+                            "size": 20
+                        },
+                        "$[1].productId": {
+                            "type": "RandomInt",
+                            "min": 0,
+                            "max": 2147483647
+                        },
+                        "$[1].productName": {
+                            "type": "RandomString",
+                            "size": 20
+                        }
+                    }
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "get products"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.0"
+        }
+    }
+}

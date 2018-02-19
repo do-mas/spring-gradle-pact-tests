@@ -1,0 +1,73 @@
+{
+    "provider": {
+        "name": "product_provider"
+    },
+    "consumer": {
+        "name": "get_product_consumer"
+    },
+    "interactions": [
+        {
+            "description": "a request to get product",
+            "request": {
+                "method": "GET",
+                "path": "/api/products/3",
+                "matchingRules": {
+                    "path": {
+                        "": {
+                            "matchers": [
+                                {
+                                    "match": "regex",
+                                    "regex": "\\/api\\/products\\/[0-9]*"
+                                }
+                            ],
+                            "combine": "AND"
+                        }
+                    }
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "productId": 1,
+                    "productName": "a product name"
+                },
+                "matchingRules": {
+                    "body": {
+                        "$.productId": {
+                            "matchers": [
+                                {
+                                    "match": "integer"
+                                }
+                            ],
+                            "combine": "AND"
+                        },
+                        "$.productName": {
+                            "matchers": [
+                                {
+                                    "match": "type"
+                                }
+                            ],
+                            "combine": "AND"
+                        }
+                    }
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "get product by id"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.12"
+        }
+    }
+}
