@@ -25,13 +25,13 @@ public class _PactProviderTest {
     }
 
     @State("get products list")
-    public void toGetState() {
+    public void getProductList() {
     }
     @State("get product by id")
-    public void sss() {
+    public void getProductById() {
     }
     @State("create product")
-    public void ss1s() {
+    public void createProduct() {
     }
 
 }
